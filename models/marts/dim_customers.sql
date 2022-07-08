@@ -25,7 +25,5 @@ select
         inner join nation
             on customer.nation_id = nation.nation_id
         inner join region
-            on nation.region_id = region.region_id
-
-)
+            on nation.region_id = region.region_id)
 select * from final
