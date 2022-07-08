@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: src
+    database: mkmart-src
+    schema: sourcedb
+    tables:
+      - name: chkorders
+      - name: customers
+      - name: nations
+      - name: regions 
+      - name: parts
+      - name: suppliers
+      - name: lineitems
+      - name: orders
+        loaded_at_field: cast(o_orderdate as timestamp)
+        freshness:
+          warn_after: {count: 1, period: day}
+          error_after: {count: 2, period: day}
+      

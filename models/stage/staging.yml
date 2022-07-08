@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: stg_nations
+    description: List of all countries
+    columns:
+      - name: nation_id
+        description: Primary Key for Nations
+        tests:
+          - unique
+          - no_empty
+      - name: region_id
+        description: '{{doc("line_number")}}'
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_regions')
+              field: region_id
+  - name: stg_regions
+    columns:
+      - name: region_id
+        description: '{{doc("order_item_id")}}'
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: Region Names
+        tests:   
+          - accepted_values:
+              values: ['ASIA','AFRICA','AMERICA','EUROPE','MIDDLE EAST','nothing']
+              config:
+                store_failures: true
+  - name: stg_orders
+    description: Details about the orders placed
+    columns:
+      - name: order_id
+        description: '{{doc("nameblock")}}'
